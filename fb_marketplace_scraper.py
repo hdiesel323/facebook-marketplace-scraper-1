@@ -5,7 +5,17 @@ import time
 from config import SCRAPING_BEE_API_KEY
 from scraper_utils import extract_product_info, save_to_json
 
+def validate_api_key(api_key):
+    if not api_key or not isinstance(api_key, str) or len(api_key) < 32:
+        raise ValueError("Invalid Scraping Bee API key. Please check your configuration.")
+
+def ensure_scraping_bee_request(url):
+    if not url.startswith("https://app.scrapingbee.com/api/v1/"):
+        raise ValueError("Direct scraping from Facebook is not allowed. Use Scraping Bee API.")
+
 def scrape_facebook_marketplace(search_query, num_pages=5, max_retries=3):
+    validate_api_key(SCRAPING_BEE_API_KEY)
+    
     base_url = "https://www.facebook.com/marketplace/search/?query="
     api_url = "https://app.scrapingbee.com/api/v1/"
 
@@ -22,6 +32,7 @@ def scrape_facebook_marketplace(search_query, num_pages=5, max_retries=3):
         
         for attempt in range(max_retries):
             try:
+                ensure_scraping_bee_request(api_url)
                 response = requests.get(api_url, params=params)
                 response.raise_for_status()
                 
@@ -50,6 +61,9 @@ def scrape_facebook_marketplace(search_query, num_pages=5, max_retries=3):
                     time.sleep(5)
                 else:
                     print("Max retries reached. Moving to the next page.")
+            except ValueError as e:
+                print(f"Scraping error: {e}")
+                return
         
         time.sleep(2)  # Add a delay between pages to avoid rate limiting
 
@@ -58,6 +72,11 @@ def scrape_facebook_marketplace(search_query, num_pages=5, max_retries=3):
     print(f"Scraping complete. {len(all_products)} products saved to output/facebook_marketplace_products.json")
 
 if __name__ == "__main__":
-    search_query = input("Enter your search query for Facebook Marketplace: ")
-    num_pages = int(input("Enter the number of pages to scrape (default is 5): ") or 5)
-    scrape_facebook_marketplace(search_query, num_pages)
+    try:
+        validate_api_key(SCRAPING_BEE_API_KEY)
+        search_query = input("Enter your search query for Facebook Marketplace: ")
+        num_pages = int(input("Enter the number of pages to scrape (default is 5): ") or 5)
+        scrape_facebook_marketplace(search_query, num_pages)
+    except ValueError as e:
+        print(f"Error: {e}")
+        print("Please check your Scraping Bee API key in the config.py file.")
