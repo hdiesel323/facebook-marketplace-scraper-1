@@ -9,12 +9,16 @@ def validate_api_key(api_key):
     if not api_key or not isinstance(api_key, str) or len(api_key) < 32:
         raise ValueError("Invalid Scraping Bee API key. Please check your configuration.")
 
-def ensure_scraping_bee_request(url):
+def ensure_scraping_bee_request(url, params):
     if not url.startswith("https://app.scrapingbee.com/api/v1/"):
         raise ValueError("Direct scraping from Facebook is not allowed. Use Scraping Bee API.")
+    if 'api_key' not in params or params['api_key'] != SCRAPING_BEE_API_KEY:
+        raise ValueError("Invalid or missing Scraping Bee API key in the request.")
 
 def scrape_facebook_marketplace(search_query, num_pages=5, max_retries=3):
+    print("Initializing scraper with Scraping Bee API...")
     validate_api_key(SCRAPING_BEE_API_KEY)
+    print(f"Scraping Bee API key validated. Length: {len(SCRAPING_BEE_API_KEY)} characters")
     
     base_url = "https://www.facebook.com/marketplace/search/?query="
     api_url = "https://app.scrapingbee.com/api/v1/"
@@ -27,13 +31,17 @@ def scrape_facebook_marketplace(search_query, num_pages=5, max_retries=3):
 
     all_products = []
 
+    print(f"Starting to scrape Facebook Marketplace for '{search_query}' using Scraping Bee...")
+
     for page in range(1, num_pages + 1):
         print(f"Scraping page {page}...")
+        print(f"Sending request to Scraping Bee API for page {page}...")
         
         for attempt in range(max_retries):
             try:
-                ensure_scraping_bee_request(api_url)
+                ensure_scraping_bee_request(api_url, params)
                 response = requests.get(api_url, params=params)
+                print(f"Received response from Scraping Bee. Status code: {response.status_code}")
                 response.raise_for_status()
                 
                 soup = BeautifulSoup(response.text, 'html.parser')
