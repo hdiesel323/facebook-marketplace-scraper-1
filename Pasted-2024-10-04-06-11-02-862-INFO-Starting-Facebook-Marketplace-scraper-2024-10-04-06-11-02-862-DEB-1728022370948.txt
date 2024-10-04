@@ -1,0 +1,38 @@
+2024-10-04 06:11:02,862 - INFO - Starting Facebook Marketplace scraper
+2024-10-04 06:11:02,862 - DEBUG - SCRAPING_BEE_API_KEY from environment: ********************************************************************************
+2024-10-04 06:11:02,862 - DEBUG - Validating API key: ********************************************************************************
+2024-10-04 06:11:02,862 - INFO - API key validation successful
+Enter your search query for Facebook Marketplace: Ford F150
+Enter the number of pages to scrape (default is 5): 2
+2024-10-04 06:11:18,968 - INFO - Initializing scraper with Scraping Bee API...
+2024-10-04 06:11:18,968 - DEBUG - Validating API key: ********************************************************************************
+2024-10-04 06:11:18,968 - INFO - API key validation successful
+2024-10-04 06:11:18,968 - INFO - Scraping Bee API key validated. Length: 80 characters
+2024-10-04 06:11:18,968 - INFO - Starting to scrape Facebook Marketplace for 'Ford F150' using Scraping Bee...
+2024-10-04 06:11:18,968 - INFO - Scraping page 1...
+2024-10-04 06:11:18,968 - DEBUG - Sending request to Scraping Bee API for page 1...
+2024-10-04 06:11:18,971 - DEBUG - Starting new HTTPS connection (1): app.scrapingbee.com:443
+2024-10-04 06:11:28,519 - DEBUG - https://app.scrapingbee.com:443 "GET /api/v1/?api_key=W3640ZRDFTHE1HR1WLNF9DV1HCCVODGO8DFX89TZOC7YUO9LOH77VO952161ETMO9UUREWL8Z67OJ3N9&url=https%3A%2F%2Fwww.facebook.com%2Fmarketplace%2Fsearch%2F%3Fquery%3DFord+F150&render_js=false HTTP/11" 500 627
+2024-10-04 06:11:28,520 - INFO - Received response from Scraping Bee. Status code: 500
+2024-10-04 06:11:28,520 - ERROR - Error occurred: 500 Server Error: INTERNAL SERVER ERROR for url: https://app.scrapingbee.com/api/v1/?api_key=W3640ZRDFTHE1HR1WLNF9DV1HCCVODGO8DFX89TZOC7YUO9LOH77VO952161ETMO9UUREWL8Z67OJ3N9&url=https%3A%2F%2Fwww.facebook.com%2Fmarketplace%2Fsearch%2F%3Fquery%3DFord+F150&render_js=false
+2024-10-04 06:11:28,520 - INFO - Retrying in 5 seconds... (Attempt 2/3)
+2024-10-04 06:11:33,521 - DEBUG - Starting new HTTPS connection (1): app.scrapingbee.com:443
+2024-10-04 06:11:45,964 - DEBUG - https://app.scrapingbee.com:443 "GET /api/v1/?api_key=W3640ZRDFTHE1HR1WLNF9DV1HCCVODGO8DFX89TZOC7YUO9LOH77VO952161ETMO9UUREWL8Z67OJ3N9&url=https%3A%2F%2Fwww.facebook.com%2Fmarketplace%2Fsearch%2F%3Fquery%3DFord+F150&render_js=false HTTP/11" 200 None
+2024-10-04 06:11:45,965 - INFO - Received response from Scraping Bee. Status code: 200
+2024-10-04 06:11:45,966 - INFO - Found 0 product cards on page 1
+2024-10-04 06:11:45,966 - INFO - No more pages found. Ending scraping.
+2024-10-04 06:11:45,966 - INFO - Total products scraped so far: 0
+2024-10-04 06:11:47,966 - INFO - Scraping page 2...
+2024-10-04 06:11:47,967 - DEBUG - Sending request to Scraping Bee API for page 2...
+2024-10-04 06:11:47,968 - DEBUG - Starting new HTTPS connection (1): app.scrapingbee.com:443
+2024-10-04 06:12:03,258 - DEBUG - https://app.scrapingbee.com:443 "GET /api/v1/?api_key=W3640ZRDFTHE1HR1WLNF9DV1HCCVODGO8DFX89TZOC7YUO9LOH77VO952161ETMO9UUREWL8Z67OJ3N9&url=https%3A%2F%2Fwww.facebook.com%2Fmarketplace%2Fsearch%2F%3Fquery%3DFord+F150&render_js=false HTTP/11" 500 627
+2024-10-04 06:12:03,259 - INFO - Received response from Scraping Bee. Status code: 500
+2024-10-04 06:12:03,259 - ERROR - Error occurred: 500 Server Error: INTERNAL SERVER ERROR for url: https://app.scrapingbee.com/api/v1/?api_key=W3640ZRDFTHE1HR1WLNF9DV1HCCVODGO8DFX89TZOC7YUO9LOH77VO952161ETMO9UUREWL8Z67OJ3N9&url=https%3A%2F%2Fwww.facebook.com%2Fmarketplace%2Fsearch%2F%3Fquery%3DFord+F150&render_js=false
+2024-10-04 06:12:03,259 - INFO - Retrying in 5 seconds... (Attempt 2/3)
+2024-10-04 06:12:08,261 - DEBUG - Starting new HTTPS connection (1): app.scrapingbee.com:443
+2024-10-04 06:12:13,919 - DEBUG - https://app.scrapingbee.com:443 "GET /api/v1/?api_key=W3640ZRDFTHE1HR1WLNF9DV1HCCVODGO8DFX89TZOC7YUO9LOH77VO952161ETMO9UUREWL8Z67OJ3N9&url=https%3A%2F%2Fwww.facebook.com%2Fmarketplace%2Fsearch%2F%3Fquery%3DFord+F150&render_js=false HTTP/11" 200 None
+2024-10-04 06:12:13,921 - INFO - Received response from Scraping Bee. Status code: 200
+2024-10-04 06:12:13,921 - INFO - Found 0 product cards on page 2
+2024-10-04 06:12:13,921 - INFO - No more pages found. Ending scraping.
+2024-10-04 06:12:13,921 - INFO - Total products scraped so far: 0
+2024-10-04 06:12:15,922 - INFO - Scraping complete. 0 products saved to output/facebook_marketplace_products.json
