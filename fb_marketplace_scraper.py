@@ -52,18 +52,21 @@ def scrape_facebook_marketplace(search_query, num_pages=5, max_retries=3):
                 
                 soup = BeautifulSoup(response.text, 'html.parser')
                 product_cards = soup.find_all('div', class_='x9f619 x78zum5 x1r8uery xdt5ytf x1iyjqo2 xs83m0k x1e558r4 x150jy0e x1iorvi4 xjkvuk6 x1a2a7pz')
+                logging.info(f"Found {len(product_cards)} product cards on page {page}")
                 
                 for card in product_cards:
                     product_info = extract_product_info(card)
                     if product_info:
+                        logging.info(f"Extracted product: {product_info['title'][:30]}...")
                         all_products.append(product_info)
                 
                 # Handle pagination
                 next_page = soup.find('a', {'aria-label': 'Next'})
-                if next_page:
+                if next_page and 'href' in next_page.attrs:
                     params['url'] = "https://www.facebook.com" + next_page['href']
+                    logging.info(f"Next page URL: {params['url']}")
                 else:
-                    logging.info("No more pages to scrape.")
+                    logging.info("No more pages found. Ending scraping.")
                     break
                 
                 break  # Success, break the retry loop
@@ -79,6 +82,7 @@ def scrape_facebook_marketplace(search_query, num_pages=5, max_retries=3):
                 logging.error(f"Scraping error: {e}")
                 return
         
+        logging.info(f"Total products scraped so far: {len(all_products)}")
         time.sleep(2)  # Add a delay between pages to avoid rate limiting
 
     # Save the scraped data to a JSON file
